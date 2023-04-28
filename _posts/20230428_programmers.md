@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title: 프로그래머스 - 문자열 내림차순
 date: 2023-04-28
 categories: Programmers
