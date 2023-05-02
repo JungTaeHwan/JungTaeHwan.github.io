@@ -1,5 +1,5 @@
 ---
-layout: single
+layout: article
 title: "프로그래머스 - 문자열 내림차순"
 ---
 
