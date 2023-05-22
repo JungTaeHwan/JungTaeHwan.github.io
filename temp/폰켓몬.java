@@ -3,8 +3,8 @@ import java.util.Set;
 
 class Solution {
     public int solution(int[] nums) {
-        Set<Integer> tempSet = new HashSet<>();
         int limitCnt = nums.length / 2;
+        Set<Integer> tempSet = new HashSet<>(limitCnt);
         
         for (int num : nums) {
             tempSet.add(num);
