@@ -35,7 +35,7 @@ function getPrimeNumberCount(strNum){
             if(checkArr[i] != 1){
                 let donPushTrg = 0;
 
-                for (let j = 2; j < checkArr[i]; j++) {
+                for (let j = 2; j < Math.sqrt(checkArr[i]); j++) {
 
                     if (checkArr[i] % j == 0) {
                         donPushTrg++
