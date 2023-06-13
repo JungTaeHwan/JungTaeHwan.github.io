@@ -1,11 +1,11 @@
 class Solution {
     public int solution(int n) {
-        int answer = 0;
+        int answer = 1;
         boolean trigger = true;
         
-        for(int i = 2; i <= n; i++){
+        for(int i = 3; i <= n; i += 2){
             trigger = true;
-            for(int j = 2; j <= Math.sqrt(i); j++){
+            for(int j = 3; j <= Math.sqrt(i); j+=2){
                 if(i % j == 0){
                     trigger = false;
                     break;
