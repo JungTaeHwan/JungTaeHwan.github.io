@@ -1,27 +1,20 @@
-
-import java.util.*;
-
 class Solution {
-    public int getPrimeCount(int n) {
-        int cnt = 1;
-
-        public boolean isPrime(int num) {
-            for (int i = 3; i <= Math.sqrt(num); i += 2) {
-                if (num % i == 0) {
-                    return false;
+    public int solution(int n) {
+        int answer = 1;
+        boolean trigger = true;
+        
+        for(int i = 3; i <= n; i += 2){
+            trigger = true;
+            for(int j = 3; j <= Math.sqrt(i); j += 2){
+                if(i % j == 0){
+                    trigger = false;
+                    break;
                 }
             }
-            return true;
-        }
-
-        if (n > 2) {
-            for (int i = 3; i <= n; i += 2) {
-                if (isPrime(i)) {
-                    cnt++;
-                }
+            if(trigger){
+                answer++;
             }
         }
-
-        return cnt;
+        return answer;
     }
 }
