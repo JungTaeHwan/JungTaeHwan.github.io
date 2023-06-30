@@ -3,7 +3,7 @@ import java.util.*;
 
 class Solution {
 
-    public int[] selectBdgExeN(int N, int[] stages) {
+    public int[] selectBdgExeNA(int N, int[] stages) {
         Map<Integer, Map<String, Double>> exeBizObj = new HashMap<>();
 
         double len = stages.length;
@@ -18,7 +18,7 @@ class Solution {
         for (int stg = 1; stg <= N; stg++) {
             Map<String, Double> tempObj = exeBizObj.getOrDefault(stg, new HashMap<>());
             tempObj.put("cnt", tempObj.getOrDefault("cnt", 0.0));
-            tempObj.put("rate", tempObj.get("cnt") / len);
+            tempObj.put("rate", Double.isNaN(tempObj.get("cnt") / len) ? 0.0 : tempObj.get("cnt") / len);
             exeBizObj.put(stg, tempObj);
 
             len -= tempObj.get("cnt");
@@ -29,13 +29,13 @@ class Solution {
         Collections.sort(entries, Comparator.comparing(entry -> entry.getValue().get("rate"),Comparator.reverseOrder()));
 
 
-        int[] result = new int[N];
+        int[] answer = new int[N];
 
-        for (int i = 0; i < result.length; i++) {
-            result[i] = entries.get(i).getKey();
+        for (int i = 0; i < answer.length; i++) {
+            answer[i] = entries.get(i).getKey();
         }
 
-        return result;
+        return answer;
     }
 
 
