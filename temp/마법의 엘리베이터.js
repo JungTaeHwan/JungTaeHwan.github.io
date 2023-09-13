@@ -1,10 +1,18 @@
 
 function solution(storey) {
-    let cnt = 0;
+
+
+    
+
+
+
+
+
+    /* let cnt = 0;
     const temp = [...(storey).toString()];
 
     for (let i = temp.length - 1; i >= 0; i--) {
-        if (temp[i] >= 5) {
+        if (temp[i] >= 5) { 
             cnt += 10 - Number(temp[i]);
 
             if (i ==0) {
@@ -12,7 +20,7 @@ function solution(storey) {
                     cnt++;
                 }
             } else {
-                if(!(temp[i] == 5 && temp[i-1] < 5)){
+                if(temp[i] != 5 || temp[i-1] >= 5){
                     temp[i - 1]++;
                 }
             }
@@ -21,5 +29,5 @@ function solution(storey) {
         }
     }
 
-    return cnt;
+    return cnt; */
 }
