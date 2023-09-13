@@ -22,4 +22,17 @@ function solution(number, limit, power) {
 	}
 
 	return answer;
+
+
+	/* const arr = Array(number + 1).fill(0);
+
+            for (let i = 1; i <= number; i++) {
+                for (let j = 1; j <= number/i; j++) {
+                    arr[i * j]++;
+                }
+            }
+
+            return arr.reduce((acc, el) => acc += el > limit ? power : el, 0);
+	let answer = 0;
+	*/ 
 }
