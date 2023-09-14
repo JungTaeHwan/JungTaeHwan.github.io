@@ -1,8 +1,13 @@
 
 function solution(storey) {
 
+    let cnt = 0;
 
+    for(let i = 1; i<= (storey).toString().length; i++){
+        
+    }
     
+
 
 
 
