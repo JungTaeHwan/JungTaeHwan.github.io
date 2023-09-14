@@ -1,7 +1,7 @@
 function solution(number, limit, power) {
 	let answer = 0;
 
-	function getCnt(num){
+	const getCnt = (num) => {
 		let cnt = 0;
 
 		for (let i = 1; i <= Math.sqrt(num); i++) {
