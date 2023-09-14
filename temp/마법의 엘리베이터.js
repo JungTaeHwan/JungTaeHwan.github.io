@@ -1,17 +1,21 @@
-
 function solution(storey) {
+    let answer;
 
-    let cnt = 0;
-
-    for(let i = 1; i<= (storey).toString().length; i++){
-        
+    function dfs(num, counter) {
+        if (counter >= answer) return;
+  
+        if (num === 0){
+            answer = counter;
+        } else {
+            let res = num % 10;
+  
+            dfs(Math.floor(num / 10), counter + res);
+            dfs(Math.floor(num / 10) + 1, counter + 10 - res);
+        }
     }
-    
-
-
-
-
-
+    dfs(storey, 0);
+      
+    return answer;
 
     /* let cnt = 0;
     const temp = [...(storey).toString()];
