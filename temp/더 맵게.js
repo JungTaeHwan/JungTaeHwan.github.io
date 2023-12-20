@@ -1,0 +1,65 @@
+function solution(scoville, K) {
+    const sortScoville = (heap, idx) => {
+      while (idx > 0) {
+        const parent = Math.floor((idx - 1) / 2);
+        if (heap[parent] <= heap[idx]) break;
+        [heap[parent], heap[idx]] = [heap[idx], heap[parent]];
+        idx = parent;
+      }
+    };
+  
+    const shiftFood = (heap, idx, size) => {
+      while (idx < size) {
+        let left = 2 * idx + 1;
+        let right = 2 * idx + 2;
+        let parent = idx;
+  
+        if (left < size && heap[left] < heap[parent]) {
+            parent = left;
+        }
+  
+        if (right < size && heap[right] < heap[parent]) {
+            parent = right;
+        }
+  
+        if (parent === idx) break;
+        [heap[idx], heap[parent]] = [heap[parent], heap[idx]];
+        idx = parent;
+      }
+    };
+  
+    const MakeHeap = (heap) => {
+      const size = heap.length;
+      for (let i = Math.floor(size / 2); i >= 0; i--) {
+        shiftFood(heap, i, size);
+      }
+    };
+  
+    MakeHeap(scoville);
+  
+    let answer = 0;
+  
+    while (scoville[0] < K) {
+      if (scoville.length == 1) {
+        return -1;
+      }
+  
+      const first = scoville[0];
+      scoville[0] = scoville[scoville.length - 1];
+      scoville.pop();
+      shiftFood(scoville, 0, scoville.length);
+  
+      const second = scoville[0];
+      scoville[0] = scoville[scoville.length - 1];
+      scoville.pop();
+      shiftFood(scoville, 0, scoville.length);
+  
+      const newScoville = first + second * 2;
+      scoville.push(newScoville);
+      sortScoville(scoville, scoville.length - 1);
+  
+      answer++;
+    }
+  
+    return answer;
+  }
