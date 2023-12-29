@@ -12,4 +12,38 @@ function solution(prices) {
 	}
 
 	return result;
+
+
+
+
+
+	const arr = Array(prices.length).fill(0);
+
+	for (let i = 0; i < prices.length; i++) {
+		let cnt = 0;
+
+		for (let j = i + 1; j < prices.length; j++) {
+			cnt++;
+
+			if(prices[i] > prices[j]){
+				break;
+			}
+		}
+
+		arr[i] = cnt;
+	}
+
+	return arr;
+
+
+	return prices.map((el,idx) =>{
+		let cnt =0;
+
+		prices.slice(idx + 1).some(price => {
+			cnt++;
+			return price < el;
+		})
+
+		return cnt;
+	});
 }
