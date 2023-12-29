@@ -15,8 +15,6 @@ function solution(prices) {
 
 
 
-
-
 	const arr = Array(prices.length).fill(0);
 
 	for (let i = 0; i < prices.length; i++) {
@@ -36,6 +34,7 @@ function solution(prices) {
 	return arr;
 
 
+	// 보류코드
 	return prices.map((el,idx) =>{
 		let cnt =0;
 
@@ -46,4 +45,20 @@ function solution(prices) {
 
 		return cnt;
 	});
+
+
+	return prices.map((el,idx) =>{
+		let cnt = 0;
+
+		for (let i = idx + 1; i < prices.length; i++) {
+			cnt++;
+
+			if(el > prices[i]){
+				break;
+			}
+		}
+
+		return cnt;
+	});
+
 }
