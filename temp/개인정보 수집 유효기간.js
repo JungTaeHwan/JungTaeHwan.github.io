@@ -29,7 +29,7 @@ function solution(today, terms, privacies) {
         month -= term;
 
         if (month < 0) {
-            year = +year + Math.floor(month / 12);
+            year = + year + Math.floor(month / 12);
             month = Math.ceil(Math.abs(month) / 12) * 12 + month;
         }
 
