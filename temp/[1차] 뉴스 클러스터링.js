@@ -109,3 +109,22 @@ function solution(str1, str2) {
 }
 
 
+function solution(str1, str2) {
+    const convertArray = str => [...str.toLowerCase()].map((_, i, arr) =>
+            isAlphabet(arr[i]) && isAlphabet(arr[i + 1])
+                    ? arr[i] + arr[i + 1]
+                    : '')
+            .filter(Boolean);
+
+    const isAlphabet = char => char?.charCodeAt() >= 97 && char?.charCodeAt() <= 122;
+
+    const [A, B] = [convertArray(str1), convertArray(str2)];
+
+    if (!A.length && !B.length) {
+        return 65536;
+    }
+
+    const [intersection, union] = [A.filter(el => B.includes(el) && B.splice(B.indexOf(el), 1)).length, A.length + B.length];
+
+    return Math.floor((intersection / union) * (65536));
+}
