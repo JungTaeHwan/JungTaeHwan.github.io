@@ -61,13 +61,14 @@ function solution(cards) {
     const scores = [];
     const opened = new Set();
     const toOpen = new Set(cards);
-    let [card] = cards;
+    const itr = toOpen.values();
+    let card = itr.next().value;
 
     while (card) {
         if (opened.has(card)) {
             scores.push(opened.size);
             opened.clear();
-            card = toOpen.values().next().value;
+            card = itr.next().value;
         } else {
             toOpen.delete(card);
             opened.add(card);
