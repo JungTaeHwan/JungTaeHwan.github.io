@@ -27,3 +27,60 @@ function solution(cards) {
         return 0;
     }
 }
+
+function solution(cards) {
+    const scores = []
+    const opened = [];
+    const toOpen = [...cards];
+    let [card] = toOpen;
+
+    while (card) {
+        if (opened.includes(card)) {
+            scores.push(opened.length);
+            opened.length = 0;
+            [card] = toOpen;
+        } else {
+            const removeIndex = toOpen.indexOf(card);
+            toOpen.splice(removeIndex, 1);
+            opened.push(card);
+            card = cards[card - 1];
+        }
+    }
+
+    if (scores.length >= 2) {
+        const maxScore = Math.max(...scores);
+        scores.splice(scores.indexOf(maxScore), 1);
+        const secondMaxScore = Math.max(...scores);
+        return maxScore * secondMaxScore;
+    } else {
+        return 0;
+    }
+}
+
+function solution(cards) {
+    const scores = [];
+    const opened = new Set();
+    const toOpen = new Set(cards);
+    let [card] = cards;
+
+    while (card) {
+        if (opened.has(card)) {
+            scores.push(opened.size);
+            opened.clear();
+            card = toOpen.values().next().value;
+        } else {
+            toOpen.delete(card);
+            opened.add(card);
+            card = cards[card - 1];
+        }
+    }
+
+    if (scores.length >= 2) {
+        const maxScore = Math.max(...scores);
+        scores.splice(scores.indexOf(maxScore), 1);
+        const secondMaxScore = Math.max(...scores);
+        return maxScore * secondMaxScore;
+    } else {
+        return 0;
+    }
+}
