@@ -70,10 +70,7 @@ function solution(board) {
             antiDiag.push((i + 1) * (len - 1));
         }
 
-        const mainSheet = [...horizon, ...vertical];
-        mainSheet.push(majorDiag, antiDiag);
-
-        return mainSheet;
+        return [...horizon, ...vertical, majorDiag, antiDiag];
     }
 
     const winOrNot = (arr) => {
@@ -83,7 +80,7 @@ function solution(board) {
     const checkSheet = getCheckSheet(board.length);
 
     const myBoard = board.flatMap(el => el.split(''));
-    
+
     const {o, x} = myBoard.reduce((obj, el, idx) => {
         if (el == 'O') {
             obj.o.push(idx);
@@ -102,7 +99,6 @@ function solution(board) {
     }else{
         return 0;
     }
-
 }
 
 
