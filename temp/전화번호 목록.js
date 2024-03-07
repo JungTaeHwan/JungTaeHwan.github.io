@@ -19,3 +19,7 @@ function solution(phone_book) {
         }
     });   
 }
+
+function solution(phone_book) {
+  return !phone_book.sort().some((phone, idx) => phone_book[idx + 1]?.startsWith(phone));
+}
