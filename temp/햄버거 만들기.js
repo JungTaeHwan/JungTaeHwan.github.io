@@ -53,3 +53,44 @@ function solution(ingredient) {
         return obj;
     }, {storage: [], hamburger: 0}).hamburger;
 }
+
+
+function solution(ingredient) {
+    let hamburger = 0;
+    let storage = [];
+
+    for (let i = 0; i < ingredient.length; i++) {
+        const stuff = ingredient[i];
+        storage.push(stuff);
+
+        if (storage.length >= 4 &&
+                stuff === 1 &&
+                storage[storage.length - 4] === 1 &&
+                storage[storage.length - 3] === 2 &&
+                storage[storage.length - 2] === 3 &&
+                storage[storage.length - 1] === 1) {
+            storage.length -= 4;
+            hamburger++;
+        }
+    }
+
+    return hamburger;
+}
+
+function solution(ingredient) {
+    return ingredient.reduce(({storage, hamburger}, stuff) => {
+        storage.push(stuff);
+
+        if (storage.length >= 4 &&
+                stuff === 1 &&
+                storage[storage.length - 4] === 1 &&
+                storage[storage.length - 3] === 2 &&
+                storage[storage.length - 2] === 3 &&
+                storage[storage.length - 1] === 1) {
+            storage.length -= 4;
+            hamburger++;
+        }
+
+        return {storage, hamburger};
+    }, {storage: [], hamburger: 0}).hamburger;
+}
