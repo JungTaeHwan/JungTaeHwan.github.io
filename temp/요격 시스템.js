@@ -183,3 +183,42 @@ function solution(targets){
         return missile;
     }, 0)
 }
+
+// [[1, 4], [3, 7], [4, 5], [4, 8], [5, 12], [10, 14], [11, 13]]
+// start: 1 end: 4     missile: 1
+// start: 3 end: 4     missile: 1
+// start: 4 end: 5     missile: 2
+// start: 4 end: 5     missile: 2
+// start: 5 end: 12     missile: 3
+// start: 10 end: 12     missile: 3
+// start: 11 end: 12     missile: 3
+
+// [[11, 13], [10, 14], [5, 12], [4, 5], [4, 8], [3, 7], [1, 4]]
+// start: undefined end: undefined     missile: 0
+// start: 11        end: 13            missile: 1
+// start: 11        end: 13            missile: 1
+// start: 11        end: 12            missile: 1
+// start: 4         end: 5             missile: 2
+// start: 4         end: 5             missile: 2
+// start: 4         end: 5             missile: 2
+// start: 1         end: 4             missile: 3
+
+
+function solution(targets){
+    targets.sort((a,b) => b[0] - a[0]);
+
+    let start, end;
+
+    return targets.reduce((missile, [s, e]) => {
+        if (e > start || s >= start) {
+            end = Math.min(end, e);
+            start = Math.max(start, s);
+        } else {
+            start = s;
+            end = e;
+            missile++;
+        }
+
+        return missile;
+    }, 0)
+}
