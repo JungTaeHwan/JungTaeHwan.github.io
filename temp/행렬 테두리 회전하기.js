@@ -35,3 +35,35 @@ function solution(rows, columns, queries) {
 
     return queries.map(query => conversion(query));
 }
+
+
+function solution(rows, columns, queries) {
+    const arr = Array.from({length: rows}, (_, i) =>
+            Array.from({length: columns}, (_, j) => columns * i + j + 1)
+    );
+
+    const conversion = (query) => {
+        const [x1, y1, x2, y2] = query.map(c => c - 1);
+        const remainR = arr[x1][y2], remainL = arr[x2][y1];
+        let minVal = Math.min(remainR, remainL);
+
+        for (let i = y2; i > y1; i--) {
+            arr[x1][i] = arr[x1][i - 1];
+            minVal = Math.min(minVal, arr[x1][i - 1]);
+        }
+
+        for (let i = y1; i < y2; i++) {
+            arr[x2][i] = arr[x2][i + 1];
+            minVal = Math.min(minVal, arr[x2][i + 1]);
+        }
+
+        for (let i = 1; i < y2 - y1; i++) {
+
+            arr[x2][y2] = remainR;
+            arr[x1 - i][y1] = remainL;
+        }
+
+    };
+
+    return queries.map(query => conversion(query));
+}
