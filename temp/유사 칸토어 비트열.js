@@ -58,3 +58,32 @@ function solution(n, l, r) {
     }
     return answer;
 }
+
+
+function solution(n, l, r) {
+    const calculateSum = (lvl, left, right) => {
+        if (lvl == 1) {
+            return [1, 1, 0, 1, 1].slice(left - 1, right).reduce((acc, el) => acc + el, 0);
+        }
+
+        const area = 5 ** (lvl - 1);
+        const alpha = Math.ceil(left / area);
+        const beta = Math.ceil(right / area);
+
+        if (alpha === beta) {
+            return alpha === 3 ? 0 : calculateSum(lvl - 1, left - (area * (alpha - 1)), right - (area * (alpha - 1)));
+        } else {
+            let sum = 0;
+            if (alpha !== 3) {
+                sum += calculateSum(lvl - 1, left - (area * (alpha - 1)), area);
+            }
+            if (beta !== 3) {
+                sum += calculateSum(lvl - 1, 1, right - (area * (beta - 1)));
+            }
+            sum += [1, 2, 4, 5].filter(el => el > alpha && el < beta).length * (4 ** (lvl - 1));
+            return sum;
+        }
+    };
+
+    return calculateSum(n, l, r);
+}
