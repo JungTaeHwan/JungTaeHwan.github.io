@@ -8,7 +8,7 @@ function solution(line) {
             const [d, e, f] = line[j];
             const determinant = a * e - d * b;
 
-            if (determinant === 0) continue; // Lines are parallel or coincident
+            if (determinant == 0) continue;
 
             const x = (b * f - e * c) / determinant;
             const y = (d * c - a * f) / determinant;
@@ -92,45 +92,3 @@ function solution(line) {
  
     return board.map(el => el.join('')).reverse();
  }
-
-
-
-
- function solution(line) {
-    const set = new Set();
-    let maxX = -Infinity, maxY = -Infinity, minX = Infinity, minY = Infinity;
-
-    for (let i = 0; i < line.length; i++) {
-        for (let j = i + 1; j < line.length; j++) {
-            const [a, b, c] = line[i];
-            const [d, e, f] = line[j];
-            const determinant = a * e - d * b;
-
-            if (determinant === 0) continue; // Lines are parallel or coincident
-
-            const x = (b * f - e * c) / determinant;
-            const y = (d * c - a * f) / determinant;
-
-            if (Number.isInteger(x) && Number.isInteger(y)) {
-                set.add(`${x},${y}`);
-                maxX = Math.max(maxX, x);
-                maxY = Math.max(maxY, y);
-                minX = Math.min(minX, x);
-                minY = Math.min(minY, y);
-            }
-        }
-    }
-
-    const meet = [...set].map(point => {
-        const [x, y] = point.split(',').map(Number);
-        return [x - minX, maxY - y];
-    });
-
-    const board = Array.from({ length: maxY - minY + 1 }, () => Array(maxX - minX + 1).fill('.'));
-
-    meet.forEach(([x, y]) => {
-        board[y][x] = '*';
-    });
-
-    return board.map(row => row.join(''));
-}
