@@ -1,24 +1,26 @@
 function solution(plans) {
+
+    const newPlans = plans.map(([name, start, time]) => {
+        const [h, m] = start.split(':').map(Number);
+
+        return [name, h * 60 + m, +time];
+    });
+
+    newPlans.sort((a, b) => b[1] - a[1]);
+
     const stack = [];
   
-    const sortedPlans = plans
-      .map(([subject, time, count]) => [subject, timeToMin(time), Number(count)])
-      .sort((a, b) => b[1] - a[1]);
-  
-    while (sortedPlans.length) {
-      const [subject, time, count] = sortedPlans.pop();
+    while (newPlans.length) {
+      const [name, time, count] = newPlans.pop();
   
       stack.forEach((val, idx) => {
-        if (time < val[1]) stack[idx][1] += count;
+        if (time < val[1]) {
+            stack[idx][1] += count;
+        }
       });
-      stack.push([subject, time + count]);
+
+      stack.push([name, time + count]);
     }
   
-    const answer = stack.sort((a, b) => a[1] - b[1]).map(val => val[0]);
-    return answer;
-  }
-  
-  const timeToMin = (time) => {
-    const [hh, mm] = time.split(':').map(Number);
-    return hh * 60 + mm;
-  }
+    return stack.sort((a, b) => a[1] - b[1]).map(([val]) => val);
+}
